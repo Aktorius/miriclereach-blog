@@ -1,3 +1,41 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://miriclereach.com/"
+title = "MiricleReach"
+theme = "PaperMod"
+languageCode = "en-GB"
+enableRobotsTXT = true
+canonifyURLs = true
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  author = "Tarik Miri"
+  description = "Cloud & Software Transformation Leader — lessons from scaling systems across Europe & MENA."
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  defaultTheme = "auto"
+  showBreadCrumbs = true
+
+  homeInfoParams = { Title = "MiricleReach", Content = "Cloud Architecture at Scale • Software Modernization • Engineering Leadership" }
+
+[menu]
+  [[menu.main]] 
+    name="Cloud Architecture" 
+    url="/cloud/"
+    weight=1
+  [[menu.main]]
+    name="Software Modernization"
+    url="/modernisation/"
+    weight=2
+  [[menu.main]] 
+    name="Engineering Leadership" 
+    url="/leadership/" 
+    weight=3
+  [[menu.main]] 
+    name="About" 
+    url="/about/" 
+    weight=4
