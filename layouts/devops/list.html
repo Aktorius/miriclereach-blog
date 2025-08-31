@@ -1,0 +1,117 @@
+{{ define "main" }}
+<main class="container mx-auto px-4 md:px-6 devops-section">
+  <!-- HERO -->
+  <section class="devops-hero">
+    <div class="devops-hero__text">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lead">{{ . }}</p>{{ end }}
+    </div>
+    {{ with .Params.images }}
+      {{ $hero := index . 0 }}
+      <div class="devops-hero__media">
+        <img src="{{ $hero | absURL }}" alt="{{ $.Title }}">
+      </div>
+    {{ end }}
+  </section>
+
+  <!-- QUICK FILTERS (by tag within this section) -->
+  {{ $all := where .Site.RegularPages "Section" "devops" }}
+  {{ $tags := slice }}
+  {{ range $all }}
+    {{ $tags = $tags | union (.Params.tags | default (slice)) }}
+  {{ end }}
+  {{ if gt (len $tags) 0 }}
+  <section class="devops-filters" aria-label="DevOps filters">
+    <div class="filters__scroll">
+      <a class="filter-pill active" href="#all" data-filter="all">All</a>
+      {{ range sort $tags }}
+        <a class="filter-pill" href="#{{ . }}" data-filter="{{ . }}">{{ . }}</a>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- FEATURED GRID -->
+  {{ $featuredSlugs := .Params.featured | default (slice) }}
+  {{ if gt (len $featuredSlugs) 0 }}
+    <section class="devops-featured">
+      <h2>Featured</h2>
+      <div class="card-grid">
+        {{ range $slug := $featuredSlugs }}
+          {{ with (index (where $all "File.ContentBaseName" $slug) 0) }}
+            <article class="card" data-tags="{{ delimit (.Params.tags | default (slice)) " " }}">
+              <a class="card__cover" href="{{ .Permalink }}">
+                <img src="{{ partial "cover-url.html" . }}" alt="{{ .Title }}">
+              </a>
+              <div class="card__body">
+                <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                {{ with .Params.summary }}<p>{{ . }}</p>{{ else }}<p>{{ .Summary }}</p>{{ end }}
+                <div class="card__meta">
+                  {{ if site.Params.ShowReadingTime }}<span>{{ i18n "read_time" .ReadingTime }}</span>{{ end }}
+                  <span>Updated {{ .Lastmod.Format "2006-01-02" }}</span>
+                </div>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+
+  <!-- LATEST POSTS -->
+  {{ $nonFeatured := where $all "File.ContentBaseName" "not in" $featuredSlugs }}
+  {{ $sorted := sort $nonFeatured "Date" "desc" }}
+  {{ $paginator := .Paginate $sorted }}
+  <section class="devops-latest">
+    <h2>Latest</h2>
+    <div class="card-list">
+      {{ range $paginator.Pages }}
+        <article class="row-card" data-tags="{{ delimit (.Params.tags | default (slice)) " " }}">
+          <a class="row-card__cover" href="{{ .Permalink }}">
+            <img src="{{ partial "cover-url.html" . }}" alt="{{ .Title }}">
+          </a>
+          <div class="row-card__body">
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            {{ with .Params.summary }}<p>{{ . }}</p>{{ else }}<p>{{ .Summary }}</p>{{ end }}
+            <div class="row-card__meta">
+              {{ if site.Params.ShowReadingTime }}<span>{{ i18n "read_time" .ReadingTime }}</span>{{ end }}
+              <span>{{ .Date.Format "2006-01-02" }}</span>
+              {{ with .Params.tags }}
+                <span class="tags">
+                  {{ range . }}<a href="{{ (printf "/tags/%s/" .) | relURL }}" class="tag">#{{ . }}</a>{{ end }}
+                </span>
+              {{ end }}
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+
+    {{ partial "pagination.html" . }}
+  </section>
+</main>
+
+<!-- tiny filter script -->
+<script>
+  (function() {
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('[data-tags]');
+    function applyFilter(f) {
+      cards.forEach(c => {
+        const tags = (c.getAttribute('data-tags') || '').split(' ');
+        const show = f === 'all' || tags.includes(f);
+        c.style.display = show ? '' : 'none';
+      });
+      pills.forEach(p => p.classList.toggle('active', p.dataset.filter === f));
+    }
+    pills.forEach(p => p.addEventListener('click', function(e){
+      e.preventDefault();
+      applyFilter(this.dataset.filter);
+      history.replaceState(null, '', this.getAttribute('href'));
+    }));
+    // initial
+    const hash = (location.hash || '#all').slice(1);
+    applyFilter(hash);
+  })();
+</script>
+{{ end }}

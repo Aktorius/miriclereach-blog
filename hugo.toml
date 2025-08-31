@@ -24,7 +24,8 @@ relativeURLs = true
   ShowCodeCopyButtons = true
   showtoc           = true
   tocopen           = false
-  images            = ["/images/og-default.png"] 
+  images            = ["/images/og-default.png"]
+
 
   # --- Profile hero on the homepage (avatar + buttons) ---
   [params.profileMode]

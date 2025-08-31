@@ -1,0 +1,17 @@
+{{- $page := . -}}
+{{- $c := $page.Params.cover -}}
+{{- $url := "" -}}
+
+{{- with $c -}}
+  {{- if eq (printf "%T" .) "string" -}}
+    {{- $url = . -}}
+  {{- else if isset . "image" -}}
+    {{- $url = .image -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $url -}}
+  {{- $url | absURL -}}
+{{- else -}}
+  {{- "/images/og-default.png" | absURL -}}
+{{- end -}}
