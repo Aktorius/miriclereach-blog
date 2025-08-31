@@ -3,7 +3,8 @@ title = "MiricleReach"
 theme = "PaperMod"
 languageCode = "en-GB"
 enableRobotsTXT = true
-canonifyURLs = true
+canonifyURLs = false
+relativeURLs = true
 
 [pagination]
   pagerSize = 10
@@ -12,15 +13,47 @@ canonifyURLs = true
   category = "categories"
   tag = "tags"
 
+# ---------- Theme Params ----------
 [params]
-  author = "Tarik Miri"
-  description = "Cloud & Software Transformation Leader — lessons from scaling systems across Europe & MENA."
-  ShowReadingTime = true
-  ShowPostNavLinks = true
-  defaultTheme = "auto"
-  showBreadCrumbs = true
+  author            = "Tarik Miri"
+  description       = "Cloud & Software Transformation Leader — lessons from scaling systems across time zones."
+  defaultTheme      = "auto"         
+  ShowReadingTime   = true
+  ShowPostNavLinks  = true
+  showBreadCrumbs   = false
+  ShowCodeCopyButtons = true
+  showtoc           = true
+  tocopen           = false
+  images            = ["/images/og-default.png"] 
 
-  homeInfoParams = { Title = "MiricleReach", Content = "Cloud Architecture at Scale • Software Modernization • Engineering Leadership" }
+  # --- Profile hero on the homepage (avatar + buttons) ---
+  [params.profileMode]
+    enabled     = true
+    title       = "MiricleReach"
+    subtitle    = "Cloud Architecture • Software Development • DevOps • Engineering Leadership"
+    imageUrl    = "/images/about/profile.png"
+    imageWidth  = 160
+    imageHeight = 160
+    imageTitle  = "Tarik Miri"
+    buttons = [
+      { name = "Cloud Architecture",           url = "/cloud/" },
+      { name = "Software Development",         url = "/development/" },
+      { name = "DevOps",                       url = "/devops/" },
+      { name = "Engineering Leadership",       url = "/leadership/" },
+      { name = "About",                        url = "/about/" }
+    ]
+
+[[params.socialIcons]]
+name = "linkedin"
+url  = "https://www.linkedin.com/in/tarikmiri"
+
+[[params.socialIcons]]
+name = "github"
+url  = "https://github.com/Aktorius"
+
+[[params.socialIcons]]
+name = "email"
+url  = "mailto:tarmiri@outlook.com"
 
 [menu]
   [[menu.main]] 
@@ -28,14 +61,27 @@ canonifyURLs = true
     url="/cloud/"
     weight=1
   [[menu.main]]
-    name="Software Modernization"
-    url="/modernisation/"
+    name="Software Development"
+    url="/development/"
     weight=2
+  [[menu.main]] 
+    name="DevOps" 
+    url="/devops/" 
+    weight=3
   [[menu.main]] 
     name="Engineering Leadership" 
     url="/leadership/" 
-    weight=3
+    weight=4
   [[menu.main]] 
     name="About" 
     url="/about/" 
-    weight=4
+    weight=5
+
+[markup]
+  [markup.highlight]
+    lineNos = true
+    style   = "github"
+
+  # Allow raw HTML in Markdown if you embed custom blocks
+  [markup.goldmark.renderer]
+    unsafe = true
