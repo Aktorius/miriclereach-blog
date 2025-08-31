@@ -1,0 +1,31 @@
+# Hugo build output
+/public/
+/resources/
+/hugo_stats.json
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.swp
+
+# Node (only if using npm for assets/themes)
+/node_modules/
+/package-lock.json
+/yarn.lock
+.pnpm-debug.log
+
+# Python virtualenv (if ever used for tooling)
+/venv/
+/__pycache__/
+/*.pyc
+
+# Misc
+*.bak
+*.tmp
