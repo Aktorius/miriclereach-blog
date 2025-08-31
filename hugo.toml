@@ -25,6 +25,9 @@ relativeURLs = true
   showtoc           = true
   tocopen           = false
   images            = ["/images/og-default.png"]
+  hideFooter    = true
+  hideCopyright = true
+  hideThemeName = true
 
 
   # --- Profile hero on the homepage (avatar + buttons) ---

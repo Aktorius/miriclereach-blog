@@ -1,15 +1,6 @@
----
-title: "DevOps"
-description: "CI/CD, platform engineering, observability, incident response, and the gritty lessons from shipping at scale."
-layout: "devops-list"      # custom list template (see below)
-showtoc: false
-images: ["/images/sections/devops-hero.jpg"]
-# Optional: surface a few featured posts at the top
-featured:
-  - "k8s-zero-downtime-rollouts"
-  - "github-actions-monorepo-strategy"
-  - "observability-slos-error-budgets"
----
-Welcome to **DevOps @ MiricleReach** — hands-on guides, hard-won playbooks, and patterns that scale.
++++
+title = "DevOps"
+description = "Break the silos between your people, processes, and platform to become a DevOps guru throughout comprehensive articles based on real-life experiences."
++++
 
-Use the filters to jump into CI/CD, Kubernetes, Observability, and more.
+If you’ve ever stared at a Friday deploy and thought “please don’t break,” this section is for you. DevOps turns that anxiety into confidence by treating delivery as a product worth investing in: clear ownership, honest metrics, automation that earns its keep, and platforms that make the right thing the easy thing. It isn’t about worshipping tools; it’s about designing a smoother path from commit to customer and learning when things wobble. The payoff is faster flow, fewer surprises, and more energy for the work that matters. Here you’ll find practical stories and playbooks to help you get there; just remember that DevOps is a journey. Whether you’re starting from a blank page or evolving a mature practice, focus on one improvement at a time: measure, learn, repeat.

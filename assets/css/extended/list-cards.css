@@ -1,0 +1,401 @@
+/* --- HERO SECTION --- */
+.section-list .lead {
+  font-size: 1.15rem;
+  opacity: .9;
+}
+
+.section-hero {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;     /* default: full width text */
+  align-items: center;
+  margin: 1.5rem 0 2rem;
+}
+
+.section-hero__media img {
+  width: 100%;
+  max-width: 560px;
+  border-radius: 12px;
+  display: block;
+  margin-inline: auto;
+}
+
+@media (min-width: 900px) {
+  /* Only split into 2 columns when we actually have media */
+  .section-hero.has-media {
+    grid-template-columns: 1.2fr .8fr;
+  }
+}
+
+/* --- FILTER PILLS (optional) --- */
+.filters__scroll {
+  display: flex;
+  gap: .5rem;
+  overflow: auto;
+  padding: .25rem 0 .75rem;
+  scrollbar-width: thin;
+}
+
+.filter-pill {
+  border: 1px solid var(--code-bg);
+  padding: .4rem .75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: .9rem;
+  white-space: nowrap;
+}
+
+.filter-pill.active {
+  background: var(--code-bg);
+}
+
+/* --- GRID CARDS (optional featured grid) --- */
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 700px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  border: 1px solid var(--code-bg);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card__cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card__body {
+  padding: .9rem;
+}
+
+.card__meta {
+  font-size: .85rem;
+  opacity: .8;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* --- ROW CARDS (list of all posts) --- */
+.row-card {
+  display: flex;
+  gap: 1rem;
+  padding: .75rem;
+  border: 1px solid var(--code-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.row-card__cover {
+  flex: 0 0 33%;
+  max-width: 33%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.row-card__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.row-card__body {
+  flex: 1 1 67%;
+}
+
+.row-card__body h3 {
+  margin: 0;
+}
+
+/* Summary: slightly smaller & softer */
+.row-card__body > p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--secondary);
+  margin-top: .25rem;
+}
+
+/* Footer/meta: single line, italic, compact */
+.row-card__meta {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--content);
+  margin-top: .35rem;
+  display: flex;
+  align-items: center;
+  gap: .9rem;              /* compact spacing */
+  flex-wrap: nowrap;       /* one line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dark mode: readable but softer than body text */
+.dark .row-card__meta {
+  color: color-mix(in oklab, var(--content) 85%, black);
+}
+
+/* --- Meta items with icons --- */
+.row-card__meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.row-card__meta .icon {
+  width: 0.95em;
+  height: 0.95em;
+  flex-shrink: 0;
+  vertical-align: middle;
+  margin-top: -1px;
+}
+
+/* Icon colors */
+.icon-clock { fill: #f59e0b; }     /* amber for reading time */
+.icon-calendar { fill: #3b82f6; }  /* blue for date */
+.icon-tag { fill: #10b981; }       /* green for tags */
+
+/* Dark mode: soften icon colors slightly */
+.dark .icon-clock,
+.dark .icon-calendar,
+.dark .icon-tag {
+  opacity: 0.9;
+}
+
+/* Tag links */
+.row-card__meta .tag {
+  color: inherit;
+  text-decoration: none;
+  transition: color .2s ease;
+  padding: 0 .15rem;
+  border-radius: .35rem;
+}
+
+.row-card__meta .tag:hover {
+  text-decoration: underline;
+  font-weight: 500;
+  color: var(--content);
+}
+
+/* “+N more” chip (truncated tags access) */
+.tag-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 .45rem;
+  margin-left: .4rem;
+  border-radius: 999px;
+  font-style: normal;      /* don’t inherit italic */
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--code-bg);
+  color: var(--content);
+  flex-shrink: 0;
+}
+
+.dark .tag-more {
+  background: color-mix(in oklab, var(--code-bg) 85%, transparent);
+}
+
+.tag-more:hover {
+  filter: brightness(1.05);
+  text-decoration: none;
+}
+
+/* Hover: brighten tag icon subtly */
+.tags.meta-item:hover .icon-tag {
+  opacity: 1;
+  filter: brightness(1.15);
+}
+
+.tags .tag {
+  margin-left: .5rem;
+  opacity: .9;
+}
+
+/* --- SERIES PROGRESS (optional) --- */
+.series-progress {
+  border: 1px dashed var(--code-bg);
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  margin: 1.25rem 0;
+}
+
+.series-progress .current a {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* --- GENERIC PILL ELEMENTS --- */
+.pill {
+  display: inline-block;
+  border: 1px solid var(--code-bg);
+  border-radius: 999px;
+  padding: .25rem .6rem;
+  font-size: .85rem;
+  margin: .15rem .25rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .row-card {
+    flex-direction: column;
+  }
+  .row-card__cover {
+    max-width: 100%;
+    height: 200px; /* consistent image height */
+  }
+
+  /* Keep meta compact; still one line if space allows */
+  .row-card__meta {
+    gap: .6rem;
+  }
+}
+
+.home-hero { margin: 2rem 0 2.5rem; }
+.home-hero .lead { opacity: .9; }
+.home-buttons { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem; }
+.home-buttons .btn {
+  border:1px solid var(--code-bg);
+  border-radius:999px;
+  padding:.5rem 1rem;
+  text-decoration:none;
+}
+.home-intro { margin-top:.75rem; }
+
+/* --- Section & Home titles spacing --- */
+.section-hero__text h1,
+.home-hero h1 {
+  margin-bottom: 0.9rem;         /* more space under main title */
+}
+
+.section-hero .lead,
+.home-hero .lead {
+  margin-top: 0;                  /* tighten to title */
+  margin-bottom: 1.2rem;          /* but add space before body */
+}
+
+/* Intro block (the paragraph before Articles) */
+.section-intro {
+  margin: 0.5rem 0 1.8rem;        /* space below intro */
+}
+
+/* “Articles” heading spacing */
+.list-all > h2 {
+  margin: 2.1rem 0 1rem;          /* more space above + below */
+}
+
+/* Card title spacing */
+.row-card__body h3 {
+  margin: 0 0 0.6rem;             /* separate title from summary */
+}
+
+/* Justify the section intro text */
+.section-intro .prose,
+.section-intro .prose p {
+  text-align: justify;
+  text-justify: inter-word;   /* better spacing on some browsers */
+  hyphens: auto;              /* nicer breaks for long words */
+}
+
+/* Justify the summary inside each card */
+.row-card__body > p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Optional: slightly nicer line breaking everywhere paragraphs appear */
+@supports (text-wrap: pretty) {
+  .section-intro .prose p,
+  .row-card__body > p { text-wrap: pretty; }
+}
+
+/* Justify body text in single posts (PaperMod uses .post-content) */
+.post-content p,
+.post-content li {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Include blockquotes too (your article opens with one) */
+.post-content blockquote,
+.post-content blockquote p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Never justify code-related blocks */
+.post-content pre,
+.post-content code,
+.post-content .highlight {
+  text-align: left !important;
+  hyphens: none !important;
+}
+
+/* Optional: prettier line breaking where supported */
+@supports (text-wrap: pretty) {
+  .post-content p,
+  .post-content li,
+  .post-content blockquote p { text-wrap: pretty; }
+}
+
+/* Single-post meta styled like card footer */
+.post-meta {
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--content);
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: .35rem;
+  margin-bottom: 0; /* PaperMod adds spacing elsewhere */
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.dark .post-meta {
+  color: color-mix(in oklab, var(--content) 85%, black);
+}
+
+/* Share the same icon sizing/alignment */
+.post-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  line-height: 1.2;
+}
+
+.post-meta .icon {
+  width: 0.95em;
+  height: 0.95em;
+  vertical-align: middle;
+  margin-top: -1px;
+  flex-shrink: 0;
+}
+
+/* Icon colors (same palette as cards) */
+.icon-clock { fill: #f59e0b; }     /* amber */
+.icon-calendar { fill: #3b82f6; }  /* blue */
+.icon-tag { fill: #10b981; }       /* green (used on cards) */
+.icon-user { fill: #8b5cf6; }      /* purple for author */
+
+.dark .icon-clock,
+.dark .icon-calendar,
+.dark .icon-tag,
+.dark .icon-user { opacity: 0.9; }

@@ -1,0 +1,12 @@
+{{/* layouts/shortcodes/zoomimg.html */}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $width := .Get "width" | default "" -}}  {{/* e.g., "1100px" or "80%" */}}
+
+<figure {{ if $width }}style="max-width: {{ $width }}; margin: 1rem auto;"{{ end }}>
+  <img class="zoomable" loading="lazy" src="{{ $src }}" alt="{{ $alt }}">
+  {{- if $caption -}}
+    <figcaption>{{ $caption }}</figcaption>
+  {{- end -}}
+</figure>

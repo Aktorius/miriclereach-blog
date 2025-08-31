@@ -1,0 +1,93 @@
+{{ define "main" }}
+<main class="container mx-auto px-4 md:px-6 section-list">
+
+  {{ $hasMedia := and .Params.images (gt (len .Params.images) 0) }}
+  <section class="section-hero{{ if $hasMedia }} has-media{{ end }}">
+    <div class="section-hero__text">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lead">{{ . }}</p>{{ end }}
+    </div>
+    {{ with .Params.images }}
+      {{ $hero := index . 0 }}
+      <div class="section-hero__media">
+        <img src="{{ $hero | absURL }}" alt="{{ $.Title }}">
+      </div>
+    {{ end }}
+  </section>
+
+  {{ if .Content }}
+  <section class="section-intro">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* Section pages */}}
+  {{ $sorted := sort .Pages "Date" "desc" }}
+  {{ $paginator := .Paginate $sorted }}
+
+  <section class="list-all">
+    <h2>Articles</h2>
+    <div class="card-list">
+      {{ range $paginator.Pages }}
+        <article class="row-card" data-tags="{{ delimit (.Params.tags | default (slice)) " " }}">
+          <a class="row-card__cover" href="{{ .Permalink }}">
+            <img src="{{ partial "cover-url.html" . }}" alt="{{ .Title }}">
+          </a>
+          <div class="row-card__body">
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            {{ with .Params.summary }}<p>{{ . }}</p>{{ else }}<p>{{ .Summary }}</p>{{ end }}
+
+            <div class="row-card__meta">
+              {{ if site.Params.ShowReadingTime }}
+                <span class="meta-item">
+                  <svg class="icon icon-clock" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 1.75A10.25 10.25 0 1 0 22.25 12 10.26 10.26 0 0 0 12 1.75zm0 18.5A8.25 8.25 0 1 1 20.25 12 8.26 8.26 0 0 1 12 20.25z"/>
+                    <path d="M12.75 7.75h-1.5v5l4.25 2.55.75-1.23-3.5-2.07z"/>
+                  </svg>
+                  {{ i18n "read_time" .ReadingTime }}
+                </span>
+              {{ end }}
+
+              <span class="meta-item">
+                <svg class="icon icon-calendar" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 2v2H5a2 2 0 0 0-2 2v2h18V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2zM3 10v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V10zm9 3a4 4 0 1 1-4 4 4 4 0 0 1 4-4z"/>
+                </svg>
+                  {{ .Date.Format "January 2, 2006" }}
+              </span>
+
+              {{ $tags := .Params.tags | default (slice) }}
+              {{ $max := 2 }}
+              {{ $shown := first $max $tags }}
+              {{ $remaining := sub (len $tags) (len $shown) }}
+
+              {{ if gt (len $tags) 0 }}
+                <span class="tags meta-item">
+                  <svg class="icon icon-tag" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.59 13.41 11.17 4H4v7.17l9.42 9.42a2 2 0 0 0 2.83 0l4.34-4.34a2 2 0 0 0 0-2.84zM7.5 9A1.5 1.5 0 1 1 9 7.5 1.5 1.5 0 0 1 7.5 9z"/>
+                  </svg>
+
+                  {{ range $shown }}
+                    <a href="{{ (printf "/tags/%s/" .) | relURL }}" class="tag">#{{ . }}</a>
+                  {{ end }}
+
+                  {{ if gt $remaining 0 }}
+                    {{ $rest := after $max $tags }}
+                    <a class="tag-more"
+                       href="{{ .Permalink }}#tags"
+                       aria-label="Show all {{ len $tags }} tags"
+                       title="{{ delimit $rest ", " }}">+{{ $remaining }} more</a>
+                  {{ end }}
+                </span>
+              {{ end }}
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+
+    {{ partial "pagination.html" . }}
+  </section>
+</main>
+{{ end }}
