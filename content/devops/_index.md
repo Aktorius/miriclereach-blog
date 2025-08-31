@@ -3,7 +3,7 @@ title: "DevOps"
 description: "CI/CD, platform engineering, observability, incident response, and the gritty lessons from shipping at scale."
 layout: "devops-list"      # custom list template (see below)
 showtoc: false
-images: ["/images/sections/devops-hero.png"]
+images: ["/images/sections/devops-hero.jpg"]
 # Optional: surface a few featured posts at the top
 featured:
   - "k8s-zero-downtime-rollouts"

@@ -7,7 +7,7 @@ description: "A reflection on the evolution of DevOps, the state of adoption in 
 #tags: ["devops", "transformation", "cloud", "leadership"]
 categories: ["DevOps"]
 cover:
-  image: "/images/covers/devops-transformation.jpg"
+  image: "/images/covers/devops/devops-transformation.jpg"
   alt: "DevOps transformation"
   caption: ""
   relative: false
