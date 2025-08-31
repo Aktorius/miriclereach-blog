@@ -1,5 +1,6 @@
 # Hugo build output
 /public/
+\public\
 /resources/
 /hugo_stats.json
 
