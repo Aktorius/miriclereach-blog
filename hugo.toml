@@ -23,81 +23,91 @@ relativeURLs = true
   showBreadCrumbs   = false
   ShowCodeCopyButtons = true
   showtoc           = true
-  tocopen           = false
-  images            = ["/images/og-default.png"]
-  hideFooter    = false
-  hideCopyright = false
-  hideThemeName = true
-  comments = true
+  tocopen           = true
+  hideFooter        = false
+  hideCopyright     = false
+  hideThemeName     = true
+  comments          = true
 
   [params.giscus]
-  repo = "Aktorius/miriclereach-comments"
-  repoID = "R_kgDOPntN-g"        # paste from giscus.app
-  category = "General"          # the exact category name
-  categoryID = "DIC_kwDOPntN-s4Cu08g"  # paste from giscus.app
-  mapping = "pathname"
-  reactions = true
-  emitMetadata = false
-  inputPosition = "bottom"
-  theme = "preferred_color_scheme"
-  lang = "en"
-  loading = "lazy"
+    repo            = "Aktorius/miriclereach-comments"
+    repoID          = "R_kgDOPntN-g"        # paste from giscus.app
+    category        = "General"             # the exact category name
+    categoryID      = "DIC_kwDOPntN-s4Cu08g" # paste from giscus.app
+    mapping         = "pathname"
+    reactions       = true
+    emitMetadata    = false
+    inputPosition   = "bottom"
+    theme           = "preferred_color_scheme"
+    lang            = "en"
+    loading         = "lazy"
 
   [params.profileMode]
     enabled     = true
     title       = "MiricleReach"
     subtitle    = "Cloud Architecture • Software Development • DevOps • Engineering Leadership"
-    imageUrl    = "/images/about/profile.png"
+    imageUrl    = "images/about/profile-small.png"
     imageWidth  = 160
     imageHeight = 160
     imageTitle  = "Tarik Miri"
     buttons = [
-      { name = "Cloud Architecture",           url = "/cloud/" },
-      { name = "Software Development",         url = "/development/" },
-      { name = "DevOps",                       url = "/devops/" },
-      { name = "Engineering Leadership",       url = "/leadership/" },
-      { name = "About",                        url = "/about/" }
+      { name = "Cloud Architecture",       url = "/cloud/" },
+      { name = "Development",              url = "/development/" },
+      { name = "DevOps",                   url = "/devops/" },
+      { name = "Engineering Leadership",   url = "/engineering-leadership/" },
+      { name = "About",                    url = "/about/" }
     ]
 
 [[params.socialIcons]]
-name = "linkedin"
-url  = "https://www.linkedin.com/in/tarikmiri"
+  name = "linkedin"
+  url  = "https://www.linkedin.com/in/tarikmiri"
 
 [[params.socialIcons]]
-name = "github"
-url  = "https://github.com/Aktorius"
+  name = "github"
+  url  = "https://github.com/Aktorius"
 
 [[params.socialIcons]]
-name = "email"
-url  = "mailto:tarmiri@outlook.com"
+  name = "email"
+  url  = "mailto:tarik.m@miriclereach.com"
+
+[params.homeInfoParams]
+  Title = "Welcome to MiricleReach"
+  Content = """
+  This is my personal space for field-tested lessons at the intersection of cloud, software, DevOps, and engineering leadership.  
+
+  I share the patterns that work, the traps that slow teams down, and the practical tools you can apply in your own environment.  
+
+  You’ll find articles on:
+  • Designing cloud platforms that make the secure path the easy path.  
+  • Building software that evolves without costly rewrites.  
+  • Modernising delivery with DevOps practices that actually scale.  
+  • Growing engineering teams without multiplying chaos.  
+
+  The goal is simple: to help you design technology and organisations that move faster, stay safer, and deliver lasting value.
+  """
 
 [menu]
   [[menu.main]] 
-    name="Cloud Architecture" 
-    url="/cloud/"
-    weight=1
+    name   = "Cloud Architecture"
+    url    = "/cloud/"
+    weight = 1
+
   [[menu.main]]
-    name="Development"
-    url="/development/"
-    weight=2
+    name   = "Development"
+    url    = "/development/"
+    weight = 2
+
   [[menu.main]] 
-    name="DevOps" 
-    url="/devops/" 
-    weight=3
+    name   = "DevOps"
+    url    = "/devops/"
+    weight = 3
+
   [[menu.main]] 
-    name="Engineering Leadership" 
-    url="/engineering-leadership/" 
-    weight=4
-  [[menu.main]] 
-    name="About" 
-    url="/about/" 
-    weight=5
+    name   = "Engineering Leadership"
+    url    = "/engineering-leadership/"
+    weight = 4
 
 [markup]
   [markup.highlight]
     lineNos = true
     style   = "github"
-
-  # Allow raw HTML in Markdown if you embed custom blocks
-  [markup.goldmark.renderer]
-    unsafe = true
