@@ -43,7 +43,6 @@ relativeURLs = true
   lang = "en"
   loading = "lazy"
 
-  # --- Profile hero on the homepage (avatar + buttons) ---
   [params.profileMode]
     enabled     = true
     title       = "MiricleReach"
@@ -78,7 +77,7 @@ url  = "mailto:tarmiri@outlook.com"
     url="/cloud/"
     weight=1
   [[menu.main]]
-    name="Software Development"
+    name="Development"
     url="/development/"
     weight=2
   [[menu.main]] 
@@ -87,7 +86,7 @@ url  = "mailto:tarmiri@outlook.com"
     weight=3
   [[menu.main]] 
     name="Engineering Leadership" 
-    url="/leadership/" 
+    url="/engineering-leadership/" 
     weight=4
   [[menu.main]] 
     name="About" 
