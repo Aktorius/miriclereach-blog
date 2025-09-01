@@ -176,4 +176,4 @@ DevOps began as a reaction to hand-offs and heroics. The technology has changed,
 
 If there’s one lever to pull next, make it **proof over permission**. Replace slow approvals with technical safety—flags, canaries, SLO-based guards, auto-rollback—and instrument the path with the few metrics that matter: lead time, deployment frequency, change failure rate, and time to restore. Pair that with a paved road that makes the secure choice the easy choice, and “DevOps” stops being a label and becomes how you work.
 
->*DevOps isn’t a destination—it’s a habit. Start small, measure, learn, repeat.*
+>*DevOps isn’t a destination, it’s a habit. Start small, measure, learn, repeat.*
