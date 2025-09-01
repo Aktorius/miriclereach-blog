@@ -1,0 +1,21 @@
+{{/* Force Giscus render when comments are enabled */}}
+{{- $enabled := and (site.Params.comments) (ne .Params.comments false) -}}
+{{- $g := site.Params.giscus -}}
+{{- if and $enabled $g.repo $g.repoID $g.category $g.categoryID -}}
+<section id="comments" class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ $g.repo }}"
+    data-repo-id="{{ $g.repoID }}"
+    data-category="{{ $g.category }}"
+    data-category-id="{{ $g.categoryID }}"
+    data-mapping="{{ $g.mapping | default "pathname" }}"
+    data-reactions-enabled="{{ cond (or (eq (printf "%T" $g.reactions) "bool") (eq (printf "%T" $g.reactions) "string")) (cond $g.reactions "1" "0") "1" }}"
+    data-emit-metadata="{{ cond $g.emitMetadata "1" "0" }}"
+    data-input-position="{{ $g.inputPosition | default "bottom" }}"
+    data-theme="{{ $g.theme | default "preferred_color_scheme" }}"
+    data-lang="{{ $g.lang | default "en" }}"
+    data-loading="{{ $g.loading | default "lazy" }}"
+    crossorigin="anonymous" async>
+  </script>
+</section>
+{{- end -}}

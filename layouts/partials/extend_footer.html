@@ -1,5 +1,45 @@
+<!-- medium-zoom (your existing code) -->
 <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script>
 <script>
   mediumZoom('img.zoomable', { background: 'rgba(0,0,0,.85)', margin: 24, scrollOffset: 0 });
 </script>
 <style>img.zoomable{cursor:zoom-in}</style>
+
+<!-- Giscus theme sync with PaperMod light/dark -->
+<script>
+  function giscusThemeFor(siteMode) {
+    return siteMode === 'dark' ? 'transparent_dark' : 'light';
+  }
+  function currentSiteMode() {
+    const stored = localStorage.getItem('pref-theme');
+    if (stored === 'dark' || stored === 'light') return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function updateGiscusTheme() {
+    const frame = document.querySelector('iframe.giscus-frame');
+    if (!frame) return;
+    const theme = giscusThemeFor(currentSiteMode());
+    frame.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+  }
+
+  // On load (give giscus time to mount)
+  window.addEventListener('load', () => setTimeout(updateGiscusTheme, 300));
+
+  // Respond to the theme toggle button (PaperMod uses #theme-toggle)
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => setTimeout(updateGiscusTheme, 50));
+  }
+
+  // Respond to OS theme changes
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    (mq.addEventListener ? mq.addEventListener : mq.addListener).call(mq, 'change', updateGiscusTheme);
+  } catch (_) {}
+
+  // Safety net: observe <html class="dark"> changes
+  new MutationObserver(updateGiscusTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>
+
+<!-- optional spacing for the comments section -->
+<style>#comments{margin-top:2rem}</style>

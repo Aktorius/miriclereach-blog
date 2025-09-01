@@ -1,0 +1,7 @@
+.footer > span:last-child {
+  display: none !important;
+}
+
+.footer > span:first-child::after {
+  content: " · All Rights Reserved";
+}

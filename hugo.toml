@@ -25,10 +25,23 @@ relativeURLs = true
   showtoc           = true
   tocopen           = false
   images            = ["/images/og-default.png"]
-  hideFooter    = true
-  hideCopyright = true
+  hideFooter    = false
+  hideCopyright = false
   hideThemeName = true
+  comments = true
 
+  [params.giscus]
+  repo = "Aktorius/miriclereach-comments"
+  repoID = "R_kgDOPntN-g"        # paste from giscus.app
+  category = "General"          # the exact category name
+  categoryID = "DIC_kwDOPntN-s4Cu08g"  # paste from giscus.app
+  mapping = "pathname"
+  reactions = true
+  emitMetadata = false
+  inputPosition = "bottom"
+  theme = "preferred_color_scheme"
+  lang = "en"
+  loading = "lazy"
 
   # --- Profile hero on the homepage (avatar + buttons) ---
   [params.profileMode]

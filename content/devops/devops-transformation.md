@@ -31,6 +31,7 @@ cover:
   hiddenInSingle: false
 showtoc: true
 tocopen: true
+comments: true
 ---
 
 >*“We’ve adopted DevOps.”
@@ -38,7 +39,7 @@ It is a line that can be heard in many organisations. Then, if you trace a typic
 
 DevOps was never meant to be a rebrand for the same old process with a shinier toolchain. It was a response to a real pain: slow feedback, risky releases, and teams optimising for their own stage of the pipeline instead of the whole flow. The promise was simple: shorten the path from commit to customer and reduce the blast radius when things go wrong. All to be achieved through shared ownership, automation that earns its keep, and learning when incidents happen.
 
-Fifteen years in, many organisations still sit in the uncanny valley between intention and reality. They have Kubernetes but release monthly. They have pipelines but no rollback. They “shift left” security but still discover issues at the gate. They measure outputs (tickets closed, servers provisioned) instead of outcomes (lead time, change failure rate, time to restore). The result is ceremony without confidence.
+More than a decade after the birth of DevOps, many organisations still sit in the uncanny valley between intention and reality. They have Kubernetes but release monthly. They have pipelines but no rollback. They “shift left” security but still discover issues at the gate. They measure outputs (tickets closed, servers provisioned) instead of outcomes (lead time, change failure rate, time to restore). The result is ceremony without confidence.
 
 This article is about closing that gap. I’ll trace how DevOps evolved, from tool-centric starts to platform engineering and SRE, and why culture and clarity of ownership matter more than the latest YAML. Then I will share some key takeways that I got from previous experience. If your deployments still feel like cliff jumps, the goal here is modest but transformative: make delivery boringly reliable.
 
@@ -56,7 +57,7 @@ DevOps didn’t appear overnight. It grew out of three currents that kept collid
 
 In **2009**, “10+ deploys per day” at Velocity and the first **DevOpsDays** crystallised the movement. The connection was simple: link Agile’s inner loop to operations’ outer loop and measure what customers actually feel, **lead time**, **deployment frequency**, **change failure rate**, and **time to restore**.
 
-Early framing came from **CAMS**—**Culture, Automation, Measurement, Sharing** (later **CALMS** with **Lean**). The order matters:
+Early framing came from **CAMS**, **Culture, Automation, Measurement, Sharing** (later **CALMS** with **Lean**). The order matters:
 
 - **Culture:** shared ownership from commit to production; blameless learning so incidents create capability, not scapegoats.  
 - **Automation:** pipelines, **infrastructure as code**, **policy as code**—humans decide *what* and *why*, machines handle the repeatable *how*.  
@@ -72,7 +73,7 @@ So when we say “DevOps,” we’re not naming a team or a stack. We’re namin
 
 ## The Evolution
 
-DevOps hasn’t advanced in a straight line; it’s moved in waves whenever a real constraint was removed. First we automated builds, then we made environments reproducible, and now we design platforms so the secure path is the easy path. Treat the phases below as a **map**, not a maturity ladder: most organisations live in more than one phase at once, and tooling only amplifies the culture you already have.
+DevOps hasn’t advanced in a straight line; it has moved in waves whenever a real constraint was removed. First we automated builds, then we made environments reproducible, and now we design platforms so the secure path is the easy path. Treat the phases below as a **map**, not a maturity ladder: most organisations live in more than one phase at once, and tooling only amplifies the culture you already have.
 
 **Phase 0: Process theatre (still common).**  
 DevOps is declared, but the system hasn’t changed: CAB queues, hand-offs, manual gates, and deployments treated as events. Pipelines exist, yet they wrap the same approvals; outputs are counted, outcomes aren’t. It’s busy, not better.
@@ -84,7 +85,7 @@ Jenkins everywhere; Puppet/Chef for config; “we do DevOps” meant “we insta
 Docker and Kubernetes normalised **declarative** infrastructure; Terraform and other IaC tools made environments reproducible; feature flags and blue/green deployments reduced blast radius. Observability matured beyond logs into metrics and traces. Yet many organisations lifted and shifted old behaviours: monthly releases on top of modern platforms, YAML standing in for real ownership.
 
 **Phase 3: Platform engineering & SRE (2020–today).**  
-The centre of gravity moved from individual pipelines to **paved roads**: internal developer platforms with golden paths, self-service environments, and **policy as code** so guardrails replace gatekeepers. **GitOps** made desired state auditable; **progressive delivery** (canary, traffic shifting) made change safer by default. **SRE** brought SLOs, error budgets, and blameless learning so reliability is engineered, not hoped for. Supply-chain security (SBOMs, signing, provenance) and automated compliance made “secure by default” a platform property. Success is measured with **DORA** and flow metrics, lead time, deployment frequency, change failure rate, time to restore, not the number of tickets closed.
+The centre of gravity moved from individual pipelines to paved roads: internal developer platforms with golden paths, self-service environments, and policy as code so guardrails replace gatekeepers. **GitOps** made desired state auditable; **progressive delivery** (canary, traffic shifting) made change safer by default. **SRE** brought SLOs, error budgets, and blameless learning so reliability is engineered, not hoped for. Supply-chain security (SBOMs, signing, provenance) and automated compliance made “secure by default” a platform property. Success is measured with **DORA** and flow metrics, lead time, deployment frequency, change failure rate, time to restore, not the number of tickets closed.
 
 {{< zoomimg
     src="/images/devops/devops-transformation/devops_timeline_full_staggered.svg"
@@ -125,26 +126,26 @@ If you follow a change from commit to customer, the story usually tells on itsel
 When you instrument the journey instead of the ceremony, the gaps become measurable. Value-stream timing, DORA, and SLOs translate “it feels slow” into numbers leaders can act on. In the metrics, it shows up like this:
 - **Lead time** measured in **weeks**, not hours.  
 - **Deployment frequency** weekly/monthly for core services.  
-- **Change failure rate** > **15%** or untracked; rollbacks are manual.  
-- **Time to restore** depends on “who’s awake,” not runbooks and SLOs.  
+- **Change failure rate** is greater than 15% or untracked; rollbacks are manual.  
+- **Time to restore** depends on “who’s awake”, not runbooks and SLOs.  
 - **WIP** is high; cycle time balloons at hand-offs (QA, security, CAB).
 
 Underneath those numbers are familiar causes. They’re not moral failings; they’re system design. The organisation manages risk with permission instead of **proof**, optimises for local efficiency instead of end-to-end flow, and buys tools before agreeing on the paved road they should enable. In practice, the roots are:
-- **Ownership stops at the repo.** Teams own code, not the **service**. Reliability, cost, and security sit “somewhere else.”  
+- **Ownership stops at the repo.** Teams own code, not the **service**. Reliability, cost, and security sit “somewhere else”.  
 - **Risk managed by ceremony.** Approvals simulate control but add latency; there’s no compensating **technical safety** (small batches, flags, canaries, auto-revert).  
 - **Tooling before principles.** Buying a platform precedes defining the **paved road** and the outcomes it should optimise (flow, safety, cost).  
 - **Invisible feedback.** Without SLIs/SLOs, you can’t tell if changes help or harm customers, so the safest path becomes “don’t change.”
 
-DevOps is not a team, stack, or migration project. It’s a **system of work** where the path from commit to customer is designed—**productised**—for small, reversible changes with clear ownership and continuous learning. Tools amplify whatever culture you already have: in a low-trust, approval-heavy system they create faster queues; in a high-ownership system they create faster flow.
+DevOps is not a team, stack, or migration project. It’s a **system of work** where the path from commit to customer is designed, **productised**, for small, reversible changes with clear ownership and continuous learning. Tools amplify whatever culture you already have: in a low-trust, approval-heavy system they create faster queues; in a high-ownership system they create faster flow.
 
-If you recognise your organisation in these symptoms, you’re not alone—and you’re not stuck. The fix isn’t “more YAML” or another committee; it’s re-shaping the system so **guardrails replace gatekeepers**, **Git is the source of truth**, and **outcomes** (lead time, CFR, MTTR, SLOs) guide decisions. The next sections show how to get there with practical steps—starting from where you are.
+If you recognise your organisation in these symptoms, you’re not alone—and you’re not stuck. The fix isn’t “more YAML” or another committee; it’s re-shaping the system so **guardrails replace gatekeepers**, **Git is the source of truth**, and **outcomes** (lead time, CFR, MTTR, SLOs) guide decisions.
 
 
 ---
 
 ## Lessons From the Trenches
 
-Across twelve years, from hands-on engineer to advisor, in organisations at every stage of the DevOps journey, a few takeaways keep proving themselves:
+Across many years, from hands-on engineer to advisor, in organisations at every stage of the DevOps journey, a few takeaways keep proving themselves:
 
 - **Culture beats tooling, every time.**  
   Kubernetes won’t save a process that batches risk. Move to *small, reversible changes* (trunk-based, flags, canaries) and make *service ownership* explicit: the team that ships owns reliability, cost, and security, with SRE support, not hand-offs.
@@ -176,4 +177,3 @@ DevOps began as a reaction to hand-offs and heroics. The technology has changed,
 If there’s one lever to pull next, make it **proof over permission**. Replace slow approvals with technical safety—flags, canaries, SLO-based guards, auto-rollback—and instrument the path with the few metrics that matter: lead time, deployment frequency, change failure rate, and time to restore. Pair that with a paved road that makes the secure choice the easy choice, and “DevOps” stops being a label and becomes how you work.
 
 >*DevOps isn’t a destination—it’s a habit. Start small, measure, learn, repeat.*
-
