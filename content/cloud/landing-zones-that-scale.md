@@ -66,9 +66,6 @@ Your **security baseline** should feel boring in the best way. Encryption is on 
 
 On **cost and ownership**, you don’t chase spreadsheets, you rely on data. Every resource carries required labels/tags (owner, environment, product, cost centre, etc.), budgets and alerts are set per team, and dashboards report unit economics (cost per request/job/user) instead of vague totals. Guardrails prevent unlabelled resources and block the handful of configurations that can surprise your bill.
 
-If you drew this on a whiteboard, it would look like: an **Org** at the top; beneath it **Security**, **Shared Services**, **Non-Prod**, and **Prod** as peers; and under Non-Prod/Prod a set of **isolated team workspaces**. Arrows from Shared Services point to the baseline capabilities (identity, network, observability, budgets) that apply everywhere. It’s simple on purpose: the secure path is the easy path, and the structure makes that obvious.
-
-
 ## Paved road = scaffolds + policies
 
 A landing zone only feels fast when **the thing you start from** and **the rules you run under** ship as one. Think of the paved road as a **versioned contract** with two halves that move together.
